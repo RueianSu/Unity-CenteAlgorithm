@@ -1,24 +1,23 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Mapbox.Utils;
 using UnityEngine;
 
-public class CenteAlgorithm : MonoBehaviour
+namespace Cente
 {
-    public Vector2 Calculate_CenterPoint(List<Vector2> Points)
+    public class CenteAlgorithm : MonoBehaviour
     {
-        int total = Points.Count;
-        double lat = 0, lon = 0;
-        foreach (Vector2 p in Points)
+        public static Vector2 GetCente(List<Vector2> Points)
         {
-            lat += p.x;// * Mathf.PI / 180;
-            lon += p.y;// * Mathf.PI / 180;        
+            int total = Points.Count;
+            double lat = 0, lon = 0;
+            foreach (Vector2 p in Points)
+            {
+                lat += p.x;
+                lon += p.y;      
+            }
+            lat /= total;
+            lon /= total;
+            Vector2 centerPoint = new Vector2((float)lat, (float)lon);
+            return centerPoint;
         }
-        lat /= total;
-        lon /= total;
-        Vector2 centerPoint = new Vector2(lat, lon);
-        return centerPoint;
     }
 }
